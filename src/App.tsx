@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Game from './Game.tsx';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             
         }}>Multiplayer</button>
       </div>
+
+      <Game/>
     </div>
   );
 }
