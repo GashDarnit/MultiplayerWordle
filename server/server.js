@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
 const http = require('http');
 
+var answer = '';
+
 // Create an HTTP server
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -32,7 +34,21 @@ wss.on('connection', (ws) => {
   });
 });
 
+
+
 // Start the server on port 3000
 server.listen(3000, () => {
   console.log('Server is listening on port 3000');
 });
+
+
+function getNewSolution(length) {
+    fetch('https://random-word-api.herokuapp.com/word?length=' + length)
+    .then(data => {
+        return data.json()
+    }).then(post => {answer = post});
+}
+
+function getSolution() {
+    return answer;
+}
