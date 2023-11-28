@@ -1,54 +1,36 @@
-const WebSocket = require('ws');
-const http = require('http');
+const express = require('express');
+const fetch = require('node-fetch').default;
+const cors = require('cors');
 
-var answer = '';
+const api = express();
+api.use(cors());
 
-// Create an HTTP server
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('WebSocket server is running');
-});
-
-// Create a WebSocket server by passing the HTTP server instance
-const wss = new WebSocket.Server({ server });
-
-// Event listener for when a client connects to the WebSocket server
-wss.on('connection', (ws) => {
-  console.log('Client connected');
-
-  // Event listener for messages from the client
-  ws.on('message', (message) => {
-    console.log(`Received message: ${message}`);
-
-    // Broadcast the message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  // Event listener for when a client disconnects
-  ws.on('close', () => {
-    console.log('Client disconnected');
-  });
-});
-
-
-
-// Start the server on port 3000
-server.listen(3000, () => {
-  console.log('Server is listening on port 3000');
-});
-
-
-function getNewSolution(length) {
-    fetch('https://random-word-api.herokuapp.com/word?length=' + length)
-    .then(data => {
-        return data.json()
-    }).then(post => {answer = post});
+async function getNewSolution(length) {
+    try {
+        const response = await fetch('https://random-word-api.herokuapp.com/word?length=' + length);
+        const data = await response.json();
+        
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error; // rethrow the error for handling in the caller
+    }
 }
 
-function getSolution() {
-    return answer;
-}
+
+api.get('/NewSolution/:length', async (req, res) => {
+   try {
+      const { length } = req.params;
+      const solution = await getNewSolution(length);
+      res.status(200).json(solution);
+      
+   } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+   }
+});
+
+api.listen(3000, () => {
+   console.log("API running at localhost: 3000"); 
+});
+
+

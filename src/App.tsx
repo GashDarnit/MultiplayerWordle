@@ -2,7 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Game from './Game.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Game from './Game.tsx';
+
+var HOST = '127.0.0.1';
+var PORT = 3000;
 
 function App() {
   const [answer, setAnswer] = useState('');
@@ -15,14 +17,7 @@ function App() {
       <div className="d-flex flex-column align-items-center">
         <button onClick = {() => { console.log(fetchSolution()) }}>Singleplayer</button>
         
-        <button onClick = {() => {
-            let socket = new WebSocket('ws://localhost:3000');
-            
-            socket.addEventListener('open', (event) => {
-              console.log('Connected to the WebSocket server');
-            });
-            
-        }}>Multiplayer</button>
+        <button>Multiplayer</button>
       </div>
 
       <Game/>
@@ -32,11 +27,15 @@ function App() {
 
 async function fetchSolution() {
   try {
-    const response = await fetch('https://random-word-api.herokuapp.com/word?length=5');
+    const response = await fetch('http://' + HOST + ':' + PORT + '/NewSolution/5');
     const data = await response.json();
     console.log(data[0]);
+    
   } catch (error) {
     console.error('Error fetching solution:', error);
   }
 }
+  
+  
+  
 export default App;
