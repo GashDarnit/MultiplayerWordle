@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "author": ["GashDarnit", "Liaw Chung Yao"],
+  "author": [
+    "GashDarnit",
+    "Liaw Chung Yao"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,8 +14,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.3.2",
+    "express": "^4.18.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ws": "^8.14.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

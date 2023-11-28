@@ -9,7 +9,15 @@ function App() {
       </header>
       <div className="d-flex flex-column align-items-center">
         <button>Singleplayer</button>
-        <button>Multiplayer</button>
+        
+        <button onClick = {() => {
+            let socket = new WebSocket('ws://localhost:3000');
+            
+            socket.addEventListener('open', (event) => {
+              console.log('Connected to the WebSocket server');
+            });
+            
+        }}>Multiplayer</button>
       </div>
     </div>
   );
