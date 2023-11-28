@@ -31,4 +31,28 @@ button {
   }
 }
 
+.button2 {
+  margin: 10px;
+  margin-left: 20px;
+  padding: 5px 20px;
+  font-size: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #ffffff;
+  border: solid;
+  width: 50%;
+  display: inline-block;
+  transition: background-color 0.8s ease;
+
+  &:hover {
+    background-color: rgba(132, 255, 183, 0.2);
+  }
+}
+
+.gameRow{
+  display: flex;
+}
+
+
+
 
