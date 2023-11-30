@@ -21,9 +21,12 @@ function Keyboard() {
             })} </div>
             
             <div className = "row3">
+                <Key keyVal = {"ENTER"} big />
                 {keys3.map((key) => {
-                    return <Key keyVal = {key}/>
-            })} </div>
+                    return <Key keyVal = {key}/>}
+                )} 
+                <Key keyVal = {"DELETE"} big />
+            </div>
         </div>
     );
 }

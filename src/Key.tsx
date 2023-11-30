@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import './App.css';
 
-function Key({ keyVal }) {
+function Key({ keyVal, big }) {
 
   return (
-    <div className = "key"> {keyVal} </div>
+    <div className = "key" id = {big && "big"}> {keyVal} </div>
   );
 }
 
