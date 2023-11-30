@@ -20,7 +20,7 @@ function App() {
         <button>Multiplayer</button>
       </div>
 
-      <Game length ='3'/>
+      <Game length={2}/>
 
 
     </div>
